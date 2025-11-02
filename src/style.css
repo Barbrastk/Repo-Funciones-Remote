@@ -43,14 +43,13 @@
   }
 
   .cambiar-turno input[type="number"] {
-    margin: 5px; /* Mismo margen para que esté alineado */
-    padding: 10px; /* Relleno más pequeño que el de los botones */
+    margin: 5px;
+    padding: 10px;
     font-size: 1rem;
-    width: 190px; /* Un ancho específico que te guste */
-    border: 1px solid #ccc; /* Un borde sutil para que sea visible */
+    width: 120px;
+    border: 1px solid #ccc; 
     border-radius: 8px;
-    background-color: #fff; /* Fondo blanco para diferenciarlo de los botones */
-    /* Aquí NO pones 'cursor: pointer' */
-
+    background-color: #fff;
     font-family: Arial, Helvetica, sans-serif;
-}
+  }  
+  }
