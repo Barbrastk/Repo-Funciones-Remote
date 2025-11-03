@@ -10,7 +10,7 @@ const btnSiguiente = document.getElementById("siguiente") as HTMLButtonElement;
 const inputTurno = document.getElementById("nuevo-turno") as HTMLInputElement;
 const btnCambiar = document.getElementById("cambiar") as HTMLButtonElement;
 
-//Creo las funciones
+//Creo todas las funciones de los botones, y llamo a los eventos
 function actualizarDisplay(): void {
     numeroTurno.textContent = turnoActual.toString().padStart(2, "0");
 }
@@ -54,4 +54,5 @@ function cambiarTurno (): void {
 
 btnCambiar.addEventListener("click", cambiarTurno);
 
+//actualiza el display con el numero resultante tras ejecutar todo
 actualizarDisplay();
