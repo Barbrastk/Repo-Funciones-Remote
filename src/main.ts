@@ -4,9 +4,8 @@ let turnoActual: number = 0;
 
 //Ahora voy con los elementos del DOM
 const numeroTurno = document.getElementById("numero-turno") as HTMLElement;
-const btnAnterior = document.getElementById("anterior") as HTMLButtonElement;
+
 const btnReset = document.getElementById("reset") as HTMLButtonElement;
-const btnSiguiente = document.getElementById("siguiente") as HTMLButtonElement;
 const inputTurno = document.getElementById("nuevo-turno") as HTMLInputElement;
 const btnCambiar = document.getElementById("cambiar") as HTMLButtonElement;
 
@@ -14,6 +13,25 @@ const btnCambiar = document.getElementById("cambiar") as HTMLButtonElement;
 function actualizarDisplay(): void {
     numeroTurno.textContent = turnoActual.toString().padStart(2, "0");
 }
+
+const anterior = () => {
+    turnoActual = turnoActual - 1; //aquí entiendo que tendré que poner que reste pero no de negativo
+
+    const elementoNumeroTurno = document.getElementById("numero-turno");
+
+    if (elementoNumeroTurno !== null && elementoNumeroTurno !==undefined && elementoNumeroTurno instanceof HTMLHeadingElement){
+        elementoNumeroTurno.textContent = turnoActual.toString().padStart(2,"0");
+}
+}
+    
+    const btnAnterior = document.getElementById("anterior");
+    if (btnAnterior !==null && btnSiguiente !== undefined && btnAnterior instanceof HTMLButtonElement) {
+        btnAnterior.addEventListener("click", () => {
+        anterior();
+        })
+    } else {
+        console.log("error");
+    }
 
 function anteriorTurno(): void {
     if (turnoActual > 0) {
@@ -33,12 +51,31 @@ function resetTurno (): void{
 btnReset.addEventListener("click", resetTurno);
 
 
-function siguienteTurno (): void {
-    turnoActual++;
-    actualizarDisplay();
+const siguiente = () => {
+    turnoActual = turnoActual + 1;
+
+    const elementoNumeroTurno = document.getElementById("numero-turno")
+
+    if (elementoNumeroTurno !== null && elementoNumeroTurno !== undefined && elementoNumeroTurno instanceof HTMLHeadingElement) {
+        elementoNumeroTurno.textContent = turnoActual.toString().padStart(2, "0");
+    }
 }
 
+const btnSiguiente = document.getElementById("siguiente");
+
+if (btnSiguiente !== null && btnSiguiente !== undefined && btnSiguiente instanceof HTMLButtonElement) {
+    btnSiguiente.addEventListener("click", () => {
+        siguiente();
+    })
+} else {
+    console.log("error");
+}
+
+
+
 btnSiguiente.addEventListener("click", siguienteTurno);
+
+
 
 function cambiarTurno (): void {
     const nuevoTurno = parseInt(inputTurno.value);
