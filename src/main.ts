@@ -2,20 +2,12 @@ import "./style.css";
 //Declaro una variable para el turno actual que empieza en cero y cambiará
 let turnoActual: number = 0;
 
-//Ahora voy con los elementos del DOM
-const numeroTurno = document.getElementById("numero-turno") as HTMLElement;
 
-const btnReset = document.getElementById("reset") as HTMLButtonElement;
-const inputTurno = document.getElementById("nuevo-turno") as HTMLInputElement;
-const btnCambiar = document.getElementById("cambiar") as HTMLButtonElement;
-
-//Creo todas las funciones de los botones, y llamo a los eventos
-function actualizarDisplay(): void {
-    numeroTurno.textContent = turnoActual.toString().padStart(2, "0");
-}
-
+//Botón Anterior
 const anterior = () => {
-    turnoActual = turnoActual - 1; //aquí entiendo que tendré que poner que reste pero no de negativo
+    if (turnoActual >0) {
+       turnoActual = turnoActual -1; 
+    }
 
     const elementoNumeroTurno = document.getElementById("numero-turno");
 
@@ -25,32 +17,39 @@ const anterior = () => {
 }
     
     const btnAnterior = document.getElementById("anterior");
-    if (btnAnterior !==null && btnSiguiente !== undefined && btnAnterior instanceof HTMLButtonElement) {
+    if (btnAnterior !==null && btnAnterior !== undefined && btnAnterior instanceof HTMLButtonElement) {
         btnAnterior.addEventListener("click", () => {
         anterior();
         })
     } else {
-        console.log("error");
+        console.log("Error: botón anterior no encontrado");
     }
 
-function anteriorTurno(): void {
-    if (turnoActual > 0) {
-        turnoActual--;
-        actualizarDisplay();
-    } 
+//Botón Reset
+    const resetTurno = () => {
+        turnoActual = 0;
+
+        const elementoNumeroTurno = document.getElementById("numero-turno");
+
+        if (elementoNumeroTurno !==null && elementoNumeroTurno !== undefined && elementoNumeroTurno instanceof HTMLHeadingElement){
+
+         elementoNumeroTurno.textContent = turnoActual
+            .toString()
+            .padStart(2, "0");
+        }
+    };
+
+const btnReset = document.getElementById("reset");
+
+if (btnReset !==null && btnReset !==undefined && btnReset instanceof HTMLButtonElement){
+    btnReset.addEventListener("click", () =>{
+    resetTurno();        
+    });    
+} else {
+    console.log("Error: botón reset no encontrado");
 }
-
-btnAnterior.addEventListener("click", anteriorTurno);
-
-
-function resetTurno (): void{
-    turnoActual = 0;
-    actualizarDisplay();
-}
-
-btnReset.addEventListener("click", resetTurno);
-
-
+    
+//Botón Siguiente
 const siguiente = () => {
     turnoActual = turnoActual + 1;
 
@@ -68,28 +67,41 @@ if (btnSiguiente !== null && btnSiguiente !== undefined && btnSiguiente instance
         siguiente();
     })
 } else {
-    console.log("error");
+    console.log("Error: botón siguiente no encontrado");
 }
 
 
+//Botón Cambiar Turno 
+const cambiarTurno = () => {
+    const inputTurno = document.getElementById("nuevo-turno");
 
-btnSiguiente.addEventListener("click", siguienteTurno);
+    if (inputTurno !== null && inputTurno !==undefined && inputTurno instanceof HTMLInputElement) {
+        const nuevoTurno = parseInt(inputTurno.value);
+        
+        if (!isNaN(nuevoTurno) && nuevoTurno >= 0) {
+            turnoActual = nuevoTurno;
 
-
-
-function cambiarTurno (): void {
-    const nuevoTurno = parseInt(inputTurno.value);
-
-    if (!isNaN(nuevoTurno) && nuevoTurno >=0) {
-        turnoActual = nuevoTurno;
-        actualizarDisplay();
-    } else{
-        alert("Por favor introduce un nuevo número válido mayor o igual a 0.");
+            const elementoNumeroTurno = document.getElementById("numero-turno");
+           
+            if (elementoNumeroTurno !== null && elementoNumeroTurno !== undefined && elementoNumeroTurno instanceof HTMLHeadingElement) 
+                {
+                elementoNumeroTurno.textContent = turnoActual
+                .toString()
+                .padStart(2, "0");
+            }
+    } else {
+        alert("Por favor introduce un número válido (mayor o igual a 0).");
     }
-    inputTurno.value = ""; //Limpia el campo de texto
+    inputTurno.value = "";
 }
+};
+    const btnCambiar = document.getElementById("cambiar");
 
-btnCambiar.addEventListener("click", cambiarTurno);
-
-//actualiza el display con el numero resultante tras ejecutar todo
-actualizarDisplay();
+if (btnCambiar !== null && btnCambiar !== undefined && btnCambiar instanceof HTMLButtonElement) 
+    {
+    btnCambiar.addEventListener("click", () => {
+        cambiarTurno();
+    });
+} else {
+    console.log("Error: botón cambiar no encontrado");
+}
